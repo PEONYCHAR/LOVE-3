@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💖 Love You Forever 💖</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;700&display=swap');
+
+        body {
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            font-family: 'Mali', cursive;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-top: 20px;
+            text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8);
+        }
+
+        .heart-container, .rose-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .heart, .rose {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.8;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0px 4px 12px rgba(255, 105, 180, 0.3);
+            font-size: 24px;
+            width: 80%;
+            max-width: 600px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            color: #ff3366;
+        }
+
+        .show-message {
+            opacity: 1 !important;
+            transform: scale(1) !important;
+            animation: popIn 0.6s ease-in-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            background-color: #ff6699;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            margin: 15px;
+            font-size: 22px;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: 0.3s;
+            font-family: 'Mali', cursive;
+        }
+
+        .btn:hover {
+            background-color: #ff3366;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+
+        .show-footer {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💖 HAPPY VALENTIE's DAY NA BABE 💖</h1>
+
+    <div class="message-box" id="message">
+        ❤️ กดปุ่มเพื่อรับความในใจ ❤️
+    </div>
+
+    <br>
+
+    <button class="btn" onclick="showMessage()">💌 กดเพื่อรับบัฟความรัก 💌</button>
+
+    <div class="heart-container" id="heart-container"></div>
+    <div class="rose-container" id="rose-container"></div>
+
+    <p class="footer" id="footer">🌹 จากณัชชาแฟนสาวสุดสวย 🌹</p>
+
+    <script>
+        const messages = [
+            "💕 แฮร่ สวัสดีที่รักน่าโง้ สุขสันต์วันวาเลนไทน์นะคะ 💕",
+            "💖 ณัชชารักนัทนะคะ รักทุกวันเลยถึงไม่ใช่วันพิเศษก็รักนัทมากๆ 💖",
+            "❤️ ถึงที่รักผู้ที่ทำงานหนักทุกวัน อยากให้พักผ่อนเยอะๆด้วยน้าเค้าเป็นห่วง ❤️",
+            "💗 ณัชชาจะอยู่เป็นตัวป่วนของนัทตลอดไป ถึงจะไม่มีประโยชน์แต่ที่รักจะไม่เหงาแน่นอน 💗",
+            "🌸 ใช่สิ ของขวัญวาเลนไทน์รอบนี้ขอติดไว้ก่อนนะ แบร่ (แต่รอไม่นานหรอกนะ อิอิ) 🌸",
+            "💞 ขอโทษที่พูดไม่รู้เรื่องบ่อยๆนะ แต่ที่รักต้องอยู่สั่งสอนณัชชาไปนานๆนะ (ขอร้อง) 💞",
+            "💝 อยากอยู่กับนัทตลอดไปเลยนะ นัทน่ารักมากๆที่สุดในโลกเลยยย 💝",
+            "💘 ขอบคุณที่ทำให้ณัชชามีความสุขมากๆเลย ขอบคุณทุกอย่างจริงๆ 💘"
+        ];
+        
+        let index = 0;
+        function showMessage() {
+            const messageBox = document.getElementById("message");
+            messageBox.style.opacity = "0";
+            setTimeout(() => {
+                messageBox.innerHTML = messages[index];
+                messageBox.classList.remove("show-message");
+                void messageBox.offsetWidth;
+                messageBox.classList.add("show-message");
+                index = (index + 1) % messages.length;
+            }, 300);
+        }
+
+        function createFloatingElement(type) {
+            const elem = document.createElement("div");
+            elem.innerHTML = type === 'heart' ? "💖" : "🌹";
+            elem.classList.add(type);
+            elem.style.left = Math.random() * 100 + "vw";
+            elem.style.animationDuration = Math.random() * 8 + 7 + "s";
+            document.getElementById(type + "-container").appendChild(elem);
+            setTimeout(() => elem.remove(), 15000);
+        }
+
+        setInterval(() => createFloatingElement('heart'), 400);
+        setInterval(() => createFloatingElement('rose'), 600);
+    </script>
+
+</body>
+</html>
